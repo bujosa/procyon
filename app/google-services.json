@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "873334666517",
+    "project_id": "procyon-ce401",
+    "storage_bucket": "procyon-ce401.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873334666517:android:dccc227d94a7cae1bb651c",
+        "android_client_info": {
+          "package_name": "com.bujosa.procyon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873334666517-9l04p3uqmocdvhuvvro6mf8ihik8b0lq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDidfOIaNWdCX19ef9JvFIuRGEjmGh0Kx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873334666517-9l04p3uqmocdvhuvvro6mf8ihik8b0lq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
