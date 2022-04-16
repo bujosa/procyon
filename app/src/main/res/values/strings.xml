@@ -4,4 +4,13 @@
     <string name="string_login_password_auto_complete">Password</string>
     <string name="login_button_mail_text">LOGIN</string>
     <string name="login_button_gmail_text">GMAIL</string>
+    <string name="login_button_register_text">Register</string>
+    <string name="login_email_error_one">Email can\'t be empty</string>
+    <string name="login_email_error_two">Password can\'t be empty</string>
+    <string name="login_mail_access_token">An error just occurred trying to access</string>
+    <string name="login_verified_mail_error">You haven\'t validated your account yet, do you want us to send you an email?</string>
+    <string name="login_verified_mail_error_ok">send mail</string>
+    <string name="login_verified_mail_error_sent">We have sent you an email</string>
+    <string name="login_verified_mail_error_not_sent">We have not been able to send the mail</string>
+    <string name="login_verified_mail_error_cancel">cancel</string>
 </resources>
