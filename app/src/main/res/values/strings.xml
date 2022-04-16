@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Procyon</string>
+    <string name="login_email_auto_complete">Email</string>
+    <string name="string_login_password_auto_complete">Password</string>
+    <string name="login_button_mail_text">LOGIN</string>
+    <string name="login_button_gmail_text">GMAIL</string>
 </resources>
