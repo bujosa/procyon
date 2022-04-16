@@ -46,9 +46,11 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/login_email_auto_complete"
                     android:inputType="textEmailAddress"
+                    android:background="@color/white"
                     android:textSize="30sp"
                     android:maxLines="1"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:layout_marginTop="5dp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,8 +66,10 @@
                     android:hint="@string/string_login_password_auto_complete"
                     android:textSize="30sp"
                     android:inputType="textPassword"
+                    android:background="@color/white"
                     android:maxLines="1"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:layout_marginTop="5dp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,19 +78,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:background="@color/black"
+                android:background="@drawable/circle"
                 android:textAllCaps="true"
-                android:text="@string/login_button_mail_text"/>
+                android:text="@string/login_button_mail_text"
+                android:layout_marginTop="10dp"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/login_button_gmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:background="@color/red"
-                android:drawableStart="@drawable/common_full_open_on_phone"
+                android:background="@drawable/circle"
+                android:backgroundTint="@color/white"
                 android:textAllCaps="true"
-                android:text="@string/login_button_gmail_text"/>
+                android:text="@string/login_button_gmail_text"
+                android:layout_marginTop="10dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/login_button_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:background="@drawable/circle"
+                android:backgroundTint="@color/red"
+                android:textAllCaps="true"
+                android:text="@string/login_button_register_text"
+                android:layout_marginTop="10dp"/>
 
         </LinearLayout>
 
