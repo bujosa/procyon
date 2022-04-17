@@ -1,8 +1,10 @@
 package com.bujosa.procyon;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.Transition;
@@ -13,13 +15,22 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int RC_SIGN_IN = 534543;
     private FirebaseAuth oAuth;
     private Button signInButtonMail, signUpButton, signInButtonGoogle;
 
@@ -49,8 +60,47 @@ public class MainActivity extends AppCompatActivity {
         signInButtonMail = findViewById(R.id.login_button_mail);
         signUpButton = findViewById(R.id.login_button_register);
 
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_client_id))
+                .requestEmail()
+                .build();
+
+        signInButtonGoogle.setOnClickListener(l -> attemptLoginGoogle(googleSignInOptions));
 
         signInButtonMail.setOnClickListener(l -> attemptLoginEmail());
+    }
+
+    private void attemptLoginGoogle(GoogleSignInOptions googleSignInOptions) {
+        GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
+        Intent signInIntent = googleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN){
+            Task<GoogleSignInAccount> result = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try{
+                GoogleSignInAccount account = result.getResult(ApiException.class);
+                assert account != null;
+                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+                if(oAuth == null){
+                    oAuth = FirebaseAuth.getInstance();
+                }
+                oAuth.signInWithCredential(credential).addOnCompleteListener(this, task ->{
+                    if(task.isSuccessful()){
+                        FirebaseUser user = task.getResult().getUser();
+                        checkUserDatabaseLogin(user);
+                    }else{
+                        showErrorDialogMail();
+                    }
+                });
+            } catch (ApiException e){
+                showErrorDialogMail();
+            }
+        }
     }
 
     private void attemptLoginEmail(){
