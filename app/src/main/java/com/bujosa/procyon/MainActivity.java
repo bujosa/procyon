@@ -10,6 +10,7 @@ import android.transition.AutoTransition;
 import android.transition.Transition;
 import android.transition.TransitionManager;
 import android.transition.TransitionSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -68,6 +69,14 @@ public class MainActivity extends AppCompatActivity {
         signInButtonGoogle.setOnClickListener(l -> attemptLoginGoogle(googleSignInOptions));
 
         signInButtonMail.setOnClickListener(l -> attemptLoginEmail());
+
+        signUpButton.setOnClickListener(l -> redirectSignUpActivity());
+    }
+
+    private void redirectSignUpActivity(){
+        Intent intent = new Intent(this, SignupActivity.class);
+        intent.putExtra(SignupActivity.EMAIL_PARAM, loginEmail.getText().toString());
+        startActivity(intent);
     }
 
     private void attemptLoginGoogle(GoogleSignInOptions googleSignInOptions) {
@@ -146,15 +155,13 @@ public class MainActivity extends AppCompatActivity {
         hideLoginButton(false);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.login_verified_mail_error)
-                .setPositiveButton(R.string.login_verified_mail_error_ok, ((dialog, which) -> {
-                    user.sendEmailVerification().addOnCompleteListener(task1 -> {
-                        if(task1.isSuccessful()){
-                            Snackbar.make(loginEmail, R.string.login_verified_mail_error_sent, Snackbar.LENGTH_SHORT).show();
-                        }else{
-                            Snackbar.make(loginEmail, R.string.login_verified_mail_error_not_sent, Snackbar.LENGTH_SHORT).show();
-                        }
-                    });
-                })).setNegativeButton(R.string.login_verified_mail_error_cancel, (dialog, which) -> {
+                .setPositiveButton(R.string.login_verified_mail_error_ok, ((dialog, which) -> user.sendEmailVerification().addOnCompleteListener(task1 -> {
+                    if(task1.isSuccessful()){
+                        Snackbar.make(loginEmail, R.string.login_verified_mail_error_sent, Snackbar.LENGTH_SHORT).show();
+                    }else{
+                        Snackbar.make(loginEmail, R.string.login_verified_mail_error_not_sent, Snackbar.LENGTH_SHORT).show();
+                    }
+                }))).setNegativeButton(R.string.login_verified_mail_error_cancel, (dialog, which) -> {
         }).show();
     }
 
@@ -184,5 +191,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void checkUserDatabaseLogin(FirebaseUser user){}
+    private void checkUserDatabaseLogin(FirebaseUser user){
+        if(user != null){
+            Log.i("login", user.getEmail());
+        }
+    }
 }

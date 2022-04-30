@@ -1,7 +1,8 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Procyon</string>
     <string name="login_email_auto_complete">Email</string>
     <string name="string_login_password_auto_complete">Password</string>
+    <string name="string_register_password_auto_complete">Confirm your Password</string>
     <string name="login_button_mail_text">LOGIN</string>
     <string name="login_button_gmail_text">GMAIL</string>
     <string name="login_button_register_text">Register</string>
@@ -13,5 +14,10 @@
     <string name="login_verified_mail_error_sent">We have sent you an email</string>
     <string name="login_verified_mail_error_not_sent">We have not been able to send the mail</string>
     <string name="login_verified_mail_error_cancel">Cancel</string>
-    <string name="default_client_id">873334666517-9l04p3uqmocdvhuvvro6mf8ihik8b0lq.apps.googleusercontent.com</string>
+    <string name="default_client_id" tools:ignore="TypographyDashes">873334666517-9l04p3uqmocdvhuvvro6mf8ihik8b0lq.apps.googleusercontent.com</string>
+    <string name="register_error_user">Invalid Email</string>
+    <string name="register_error_password">Invalid Password</string>
+    <string name="register_error_password_not_match">Passwords are not the same</string>
+    <string name="register_created">You have successfully registered</string>
+    <string name="register_created_error">There was an error registering your account</string>
 </resources>
